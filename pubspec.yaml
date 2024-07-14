@@ -76,6 +76,12 @@ flutter:
      - assets/logo/
 #     - images/a_dot_ham.jpeg
 
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/core/constants/
+  filename: my_assets.dart
+
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
