@@ -1,16 +1,30 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bogging_app/core/constant/my_assests.dart';
 import 'package:bogging_app/core/constant/my_colors.dart';
+import 'package:bogging_app/presentation/screens/auth/auth.dart';
+import 'package:bogging_app/presentation/screens/onboard/onboard_view_model.dart';
+import 'package:bogging_app/presentation/screens/onboard/widgets/onboard_first.dart';
+import 'package:bogging_app/presentation/screens/onboard/widgets/onboard_second.dart';
+import 'package:bogging_app/presentation/screens/onboard/widgets/onboard_third.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../router/router_import.gr.dart';
 
 @RoutePage()
-class OnBoardPage extends StatelessWidget {
+class OnBoardPage extends StatefulWidget {
   static const page = OnBoardPageRoute();
 
   const OnBoardPage({super.key});
 
+  @override
+  State<OnBoardPage> createState() => _OnBoardPageState();
+}
+
+class _OnBoardPageState extends State<OnBoardPage> {
+  OnBoardView onBoardView = OnBoardView();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,61 +33,30 @@ class OnBoardPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24 ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/logo/muse-logo-removebg-preview.png",
+                Image.asset(MyAssests.mainLogo,
                   color: MyColors.primaryColor,
-                  height: 100,
-                  width: 200,
+                  height: 80.h,
+                  width: 139.w,
                 ),
+                63.h.heightBox,
                 PageView(
-                  children: [
-                    Column(
-                      children: [
-                        Image.asset("assets/images/onboardB (1).jpeg"),
-                        "Set your goals, Know how much each one will coast. There's a limit to how much you can cut. There's no limit to how much you can earn."
-                            .text
-                            .size(20)
-                            .fontWeight(FontWeight.w500)
-                        .align(TextAlign.center)
-                            .color(Colors.black)
-                            .make(),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Image.asset("assets/images/onboardB (3).jpeg"),
-                        "The ability to do what you want, when you want, with who you want,"
-                            " for as long as you want to,"
-                            " pays the highest dividend that exists in finance."
-                            .text
-                            .size(20)
-                            .fontWeight(FontWeight.w500)
-                            .align(TextAlign.center)
-                            .color(Colors.black)
-                            .make(),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Image.asset("assets/images/onboardB (2).jpeg"),
-                        "Nothing in life is to be feared.\nIt's only to be understood. Take your TIME"
-                            .text
-                            .size(20)
-                            .fontWeight(FontWeight.w500)
-                            .align(TextAlign.center)
-                            .color(Colors.black)
-                            .make(),
-                      ],
-                    ),
-
+                  controller: onBoardView.pageController,
+                  children: const [
+                    OnBoardFirst(),
+                    OnBoardSecond(),
+                    OnBoardThird(),
                   ],
                 ).expand(),
-                ElevatedButton(onPressed: (){},
+                61.h.heightBox,
+                ElevatedButton(
+                    onPressed: ()=> AutoRouter.of(context).push( const AuthPageRoute()),
                     style: ElevatedButton.
                     styleFrom(backgroundColor: MyColors.primaryColor,
-                        minimumSize: Size(MediaQuery.of(context).size.width, 44),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),),
+                        minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11.r)),),
                     child: "Get Started".
                     text.
                     size(20).
@@ -81,18 +64,32 @@ class OnBoardPage extends StatelessWidget {
                     color(Colors.white).
                     make()
                 ),
+                const SizedBox(height: 61),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                   "Skip"
                       .text
-                      .size(20)
+                      .size(20.sp)
                       .fontWeight(FontWeight.w700)
                       .color(MyColors.primaryColor)
                       .make(),
+
+                    SmoothPageIndicator(
+                        controller: onBoardView.pageController,  // PageController
+                        count:  3,
+                        effect:  const WormEffect(
+                          activeDotColor: MyColors.primaryColor,
+                          dotWidth: 10.0,
+                          dotHeight: 10.0,
+                        ),  // your preferred effect
+                        onDotClicked: (index){
+
+                        }
+                    ),
                   "Next"
                       .text
-                      .size(20)
+                      .size(20.sp)
                       .fontWeight(FontWeight.w700)
                       .color(MyColors.primaryColor)
                       .make()

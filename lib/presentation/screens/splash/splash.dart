@@ -25,9 +25,9 @@ class _SplashState extends State<Splash> {
       body: Center(child:
       FadedScaleAnimation(
         child: Image.asset(
-          "assets/logo/muse-logo-removebg-preview.png",
-        height: 100,
-        width: 200,),
+          MyAssests.mainLogo,
+        height: 100.h,
+        width: 200.w,),
       )),
     );
   }
