@@ -92,7 +92,21 @@ class _LoginState extends State<Login> {
                             ],
                           ),
                           50.h.heightBox,
-                          PrimaryButton(title: "Login", onPressed: (){}),
+                          // PrimaryButton(title: "Login", onPressed: (){}),
+
+                          ElevatedButton(
+                              onPressed: ()=> AutoRouter.of(context).push( const GeneralPageRoute()),
+                              style: ElevatedButton.
+                              styleFrom(backgroundColor: MyColors.primaryColor,
+                                minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11.r)),),
+                              child: "Login".
+                              text.
+                              size(20).
+                              fontWeight(FontWeight.w700).
+                              color(Colors.white).
+                              make()
+                          ),
                           15.h.heightBox,
                           "Don't have any account".richText
                               .size(15)
