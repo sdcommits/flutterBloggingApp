@@ -16,6 +16,8 @@ import 'package:bogging_app/presentation/screens/splash/splash_import.dart'
 
 import '../screens/auth/Login/login.dart';
 import '../screens/auth/Register/register.dart';
+import '../screens/general/categories/categories.dart';
+import '../screens/general/widgets/general.dart';
 import '../screens/onboard/onboard.dart';
 
 abstract class $AppRouter extends _i2.RootStackRouter {
@@ -54,6 +56,13 @@ abstract class $AppRouter extends _i2.RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const Register(),
+      );
+    },
+
+    GeneralPageRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const General(),
       );
     },
   };
@@ -127,6 +136,21 @@ class AuthPageRoute extends PageRouteInfo<void> {
   );
 
   static const String name = 'AuthPageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+
+/// generated route for
+/// [GeneralPage]
+class GeneralPageRoute extends PageRouteInfo<void> {
+  const GeneralPageRoute({List<PageRouteInfo>? children})
+      : super(
+    GeneralPageRoute.name,
+    initialChildren: children,
+  );
+
+  static const String name = 'GeneralPageRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
