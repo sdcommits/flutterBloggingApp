@@ -1,4 +1,5 @@
 import 'package:bogging_app/core/constant/my_assests.dart';
+import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -41,12 +42,39 @@ class _HomeState extends State<Home> {
                     width: 160,
                     fit: BoxFit.cover )
                         .cornerRadius(20),
-
+                    10.w.widthBox,
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          "Latest Posts".text.size(16).make(),
+                          "Netflix Will Charge Money for Password Sharing"
+                              .text
+                              .size(16)
+                          .maxLines(2)
+                          .bold
+                              .make(),
+                          6.h.heightBox,
+                          Row(
+                            children: [
+                              const Icon(FeatherIcons.clock, color: Colors.grey, size:  16,),
+                              " 6 Months ago"
+                                  .text.size(16).color(Colors.grey).size(16).make(),
+
+                            ],
+                          ),
+                          6.h.heightBox,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // const Icon(FeatherIcons.eye),
+                              " 59 views"
+                                  .text.size(16).make(),
+                              const Icon(FeatherIcons.bookmark, size: 18)
+
+                            ],
+                          ),
+                          6.h.heightBox,
                         ],
-                      )
+                      ).expand()
 
                     ],
                   );
