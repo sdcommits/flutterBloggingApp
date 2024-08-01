@@ -18,13 +18,40 @@ class _CategoriesState extends State<Categories> {
       appBar: AppBar
         (
         title: "Categories".text.size(20).make(),
+        automaticallyImplyLeading: false,
+        backgroundColor: MyColors.primaryColor,
+
         actions: [
           IconButton(onPressed: (){}, icon: Icon(FeatherIcons.plus))
         ]
       ),
 
       body:
-         Center(child: Text("This is Categories")),
+         ListView.separated(
+           itemCount: 10,
+             itemBuilder: (context, index) => const SizedBox(height: 20), separatorBuilder: (BuildContext context, int index) {
+             return Card(
+               child : ListTile(
+                 leading: "${index+1}".text.size(16).make() ,
+                 title: "Enter".text.size(20).make(),
+                 trailing: SizedBox(
+                   width: 100,
+                   child: Row(
+                     children: [
+                       IconButton(onPressed: (){}, icon: const Icon(FeatherIcons.edit, color: Colors.green,)),
+                       IconButton(onPressed: (){}, icon: const Icon(FeatherIcons.delete, color: Colors.red,)),
+
+                     ],
+
+                   ),
+                 ),
+
+               ),
+
+             );
+         },
+
+             )
 
     );
   }
