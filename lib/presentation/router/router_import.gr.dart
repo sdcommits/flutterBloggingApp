@@ -11,6 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/presentation/screens/auth/auth.dart';
+import 'package:bogging_app/presentation/screens/auth/widgets/home_details.dart';
 import 'package:bogging_app/presentation/screens/splash/splash_import.dart'
     as _i1;
 
@@ -63,6 +64,13 @@ abstract class $AppRouter extends _i2.RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const General(),
+      );
+    },
+
+    HomeDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomeDetails(),
       );
     },
   };
@@ -154,4 +162,21 @@ class GeneralPageRoute extends PageRouteInfo<void> {
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
+
+
+/// generated route for
+/// [HomeDetailsPage]
+
+class HomeDetailsRoute extends PageRouteInfo<void> {
+  const HomeDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+    GeneralPageRoute.name,
+    initialChildren: children,
+  );
+
+  static const String name = 'HomeDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
 
