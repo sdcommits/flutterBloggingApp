@@ -39,7 +39,7 @@ class _CategoriesState extends State<Categories> {
                    child: Row(
                      children: [
                        IconButton(onPressed: (){}, icon: const Icon(FeatherIcons.edit, color: Colors.green,)),
-                       IconButton(onPressed: (){}, icon: const Icon(FeatherIcons.delete, color: Colors.red,)),
+                       IconButton(onPressed: (){}, icon: const Icon(FeatherIcons.delete , color: Colors.red,)),
 
                      ],
 
