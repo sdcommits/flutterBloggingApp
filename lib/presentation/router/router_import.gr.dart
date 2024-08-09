@@ -39,6 +39,13 @@ abstract class $AppRouter extends _i2.RootStackRouter {
       );
     },
 
+    HomeDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomeDetails(),
+      );
+    },
+
     AuthPageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -67,12 +74,7 @@ abstract class $AppRouter extends _i2.RootStackRouter {
       );
     },
 
-    HomeDetailsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeDetails(),
-      );
-    },
+
   };
 }
 
@@ -115,6 +117,21 @@ class RegisterPageRoute extends PageRouteInfo<void> {
   );
 
   static const String name = 'RegisterPageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomeDetailsPage]
+
+class HomeDetailsRoute extends PageRouteInfo<void> {
+  const HomeDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+    HomeDetailsRoute.name,
+    initialChildren: children,
+  );
+
+  static const String name = 'HomeDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -163,20 +180,5 @@ class GeneralPageRoute extends PageRouteInfo<void> {
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
-
-/// generated route for
-/// [HomeDetailsPage]
-
-class HomeDetailsRoute extends PageRouteInfo<void> {
-  const HomeDetailsRoute({List<PageRouteInfo>? children})
-      : super(
-    GeneralPageRoute.name,
-    initialChildren: children,
-  );
-
-  static const String name = 'HomeDetailsRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
 
 
