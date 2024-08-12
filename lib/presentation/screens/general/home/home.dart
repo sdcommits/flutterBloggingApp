@@ -1,9 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/core/constant/my_assests.dart';
+import 'package:bogging_app/presentation/router/router_import.gr.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+
+// @RoutePage()
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -20,7 +24,11 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: [
-              Image.asset(MyAssests.assetsImageNetFlix).cornerRadius(20),
+              GestureDetector(
+                onTap: ()=> AutoRouter.of(context).push(HomeDetailsRoute()),
+                  child:
+                  Image.asset(MyAssests.assetsImageNetFlix)
+                      .cornerRadius(20)),
               20.h.heightBox,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,11 +45,15 @@ class _HomeState extends State<Home> {
                 separatorBuilder: (context, index)=> SizedBox(height: 15,),
                 itemBuilder: (context,index){
                   return Row(
-                    children: [Image.asset(MyAssests.assetsImageNetFlix,
-                      height: 100,
+                    children: [
+                      GestureDetector(
+                        onTap: ()=> AutoRouter.of(context).push( const HomeDetailsRoute()),
+                        child: Image.asset(MyAssests.assetsImageNetFlix,
+                        height: 100,
                     width: 160,
                     fit: BoxFit.cover )
-                        .cornerRadius(20),
+                          .cornerRadius(20),
+                      ),
                     10.w.widthBox,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
