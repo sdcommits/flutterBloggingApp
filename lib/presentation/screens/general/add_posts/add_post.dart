@@ -86,7 +86,7 @@ class _AddPostsState extends State<AddPosts> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   "Categoiries".text.make(),
-                  Icon(FeatherIcons.chevronRight)
+                  Icon(FeatherIcons.chevronRight),
                 ],
               ),
             ),
