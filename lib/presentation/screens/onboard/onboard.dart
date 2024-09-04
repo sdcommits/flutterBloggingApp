@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/core/constant/my_assests.dart';
 import 'package:bogging_app/core/constant/my_colors.dart';
+import 'package:bogging_app/data/data_sources/remote/api_client.dart';
 import 'package:bogging_app/presentation/screens/auth/auth.dart';
 import 'package:bogging_app/presentation/screens/onboard/onboard_view_model.dart';
 import 'package:bogging_app/presentation/screens/onboard/widgets/onboard_first.dart';
@@ -52,7 +53,11 @@ class _OnBoardPageState extends State<OnBoardPage> {
                 ).expand(),
                 61.h.heightBox,
                 ElevatedButton(
-                    onPressed: ()=> AutoRouter.of(context).push( const AuthPageRoute()),
+                    // onPressed: ()=> AutoRouter.of(context).
+                    // push( const AuthPageRoute()),
+                    onPressed: (){
+                      ApiClient().getTags();
+                    },
                     style: ElevatedButton.
                     styleFrom(backgroundColor: MyColors.primaryColor,
                         minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
