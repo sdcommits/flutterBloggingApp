@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,11 +10,23 @@ class ApiClient {
 
   getTags() async {
 
-    final dio = Dio();
+
+
+    final options = BaseOptions(
+      baseUrl : ApiConstant.mainUrl,
+      // dio.options.baseUrl = 'https://api.pub.dev';
+      // dio.options.connectTimeout: Duration(Second: 5);
+    );
+
+    final dio = Dio(options);
+
     try {
-      var response = await dio.get(ApiConstant.mainUrl + ApiEndpointUrls.tags);
-      debugPrint(response.statusCode.toString());
-      // debugPrint(response.data);
+      debugPrint("=========API REQUEST============");
+      debugPrint("Request Url: ${options.baseUrl + ApiEndpointUrls.tags}");
+      var response = await dio.get(ApiEndpointUrls.tags);
+      debugPrint("=========API RESPONSE============");
+      debugPrint("Status Code : ${response.statusCode}");
+      log("DATA: ${response.data}");
     } on DioException catch (e) {
       if (e.response != null) {
         debugPrint(e.response!.data);
