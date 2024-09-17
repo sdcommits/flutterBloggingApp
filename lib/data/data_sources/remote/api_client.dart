@@ -23,6 +23,7 @@ class ApiClient {
 
     final dio = Dio(options);
 
+
     try {
       debugPrint("=========API REQUEST============");
       debugPrint("Request Url: ${baseOptions.baseUrl + path}");
@@ -45,7 +46,7 @@ class ApiClient {
   }
 
   Future<Response> postRequest({required String path}) async {
-    Map body = {"title": "newdellbag", "slug": "newdellbag"};
+    Map body = {"title": "newdellbag2", "slug": "newdellbag2"};
     final options = Options(
       headers: {"Authorization" :
       "Bearer 94|Qwer"},
