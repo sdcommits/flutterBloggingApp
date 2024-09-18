@@ -45,8 +45,7 @@ class ApiClient {
     }
   }
 
-  Future<Response> postRequest({required String path}) async {
-    Map body = {"title": "newdellbag2", "slug": "newdellbag2"};
+  Future<Response> postRequest({required String path, required dynamic body}) async {
     final options = Options(
       headers: {"Authorization" :
       "Bearer 94|Qwer"},
