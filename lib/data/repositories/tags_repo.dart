@@ -13,15 +13,17 @@ class TagsRepo extends ApiClient{
       final response =  await getRequest(path: ApiEndpointUrls.tags);
       if(response.statusCode == 200){
 
-        var mapData = response.data;
-        Vx.log(mapData);
+        // var mapData = response.data;
+        // Vx.log(mapData);
 
-        var stringData = jsonDecode(response.data);
-        Vx.log(stringData);
+        //1 st solution
+        // var stringData = tagsModelFromJson(jsonEncode(response.data));
+        // Vx.log(stringData);
 
-        // final responseData = tagsModelFromJson(response.data);
-         // return responseData;
-        // Vx.log(responseData);
+        // 2 nd solution'
+        var responseData = TagsModel.fromJson(response.data);
+        return responseData;
+
       }
       else{
         TagsModel();
