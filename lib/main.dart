@@ -2,10 +2,19 @@ import 'package:bogging_app/core/constant/my_strings.dart';
 import 'package:bogging_app/core/themes/app_themes.dart';
 import 'package:bogging_app/presentation/router/router_import.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'data/repositories/repository.dart';
+import 'data/repositories/tags_repo.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(RepositoryProvider(
+      create: (context) => Repository(
+        tagsRepo: TagsRepo(),
+      ),
+    child : MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
