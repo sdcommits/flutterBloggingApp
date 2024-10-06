@@ -1,9 +1,11 @@
 import 'package:bogging_app/core/constant/my_strings.dart';
 import 'package:bogging_app/core/themes/app_themes.dart';
 import 'package:bogging_app/presentation/router/router_import.dart';
+import 'package:bogging_app/presentation/screens/general/tags/tags_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_bloc/cubit/velocity_cubit/velocity_cubit.dart';
 
 import 'data/repositories/repository.dart';
 import 'data/repositories/tags_repo.dart';
@@ -40,3 +42,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
