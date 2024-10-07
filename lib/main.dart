@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize : const Size(390 , 844),
       minTextAdapt: true,
-      // spiltScreenMode: true,
+      splitScreenMode: true,
         useInheritedMediaQuery: true,
       builder: (context, child) {
         return MaterialApp.router(
