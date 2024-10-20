@@ -5,4 +5,6 @@ class ApiEndpointUrls{
   static const String posts = "posts";
   static const String categories = "categories";
   static const String addTags = "add-tags";
+
+  static const String login = "login";
 }
