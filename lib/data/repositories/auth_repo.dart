@@ -1,13 +1,14 @@
-
+import 'dart:convert';
 import 'package:velocity_x/velocity_x.dart';
-
+import '../../presentation/screens/auth/login/login_model.dart';
+import '../../presentation/screens/general/tags/tags_model.dart';
 import '../data_sources/remote/api_client.dart';
 import '../data_sources/remote/api_endpoint_urls.dart';
 
-class AuthRepo extends ApiC lient{
+class AuthRepo extends ApiClient{
   AuthRepo();
 
-  Future<TagsModel> getAllTags(String email, String password) async{
+  Future<LoginModel> userLogin(String email, String password) async{
     Map body = {
       "email":email,
       "password":password,
@@ -16,31 +17,21 @@ class AuthRepo extends ApiC lient{
       final response =  await postRequest(path: ApiEndpointUrls.login, body: body);
       if(response.statusCode == 200){
 
-        final responseData = tagsModelFromJson(jsonEncode(response.data));
-
-        // var mapData = response.data;
-        // Vx.log(mapData);
-
-        //1 st solution
-        // var stringData = tagsModelFromJson(jsonEncode(response.data));
-        // Vx.log(stringData);
-
-        // 2 nd solution'
-        // var responseData = TagsModel.fromJson(response.data);
+        final responseData = loginModelFromJson(jsonEncode(response.data));
         return responseData;
 
       }
       else{
-        TagsModel();
+        LoginModel();
       }
     }
     on Exception catch(e){
       Vx.log(e);
-      TagsModel();
+      LoginModel();
     }
-    return TagsModel();
+    return LoginModel();
 
   }
 
-  postRequest({required String path, required Map body}) {}
+//   postRequest({required String path, required Map body}) {}
 }
