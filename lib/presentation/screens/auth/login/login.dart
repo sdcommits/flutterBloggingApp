@@ -2,14 +2,17 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/core/constant/my_colors.dart';
+import 'package:bogging_app/data/repositories/repository.dart';
 import 'package:bogging_app/presentation/common_widgets/common_widgets.dart';
 import 'package:bogging_app/presentation/router/router_import.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../core/constant/my_assests.dart';
+import 'login_view_model.dart';
 
 @RoutePage()
 class Login extends StatefulWidget {
@@ -23,6 +26,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  late LoginViewModel loginViewModel;
+
+  @override
+  void initState(){
+    loginViewModel = LoginViewModel(repository: context.read<Repository>());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,24 +73,26 @@ class _LoginState extends State<Login> {
                           48.h.heightBox,
                           "Email".text.size(15).fontWeight(FontWeight.normal).make(),
                           8.h.heightBox,
-                           const VxTextField(
+                           VxTextField(
                             borderColor: Colors.brown,
                              borderType: VxTextFieldBorderType.roundLine,
                              borderRadius: 10,
-                             prefixIcon: Icon(Icons.email),
+                             prefixIcon: const Icon(Icons.email),
+                             controller: loginViewModel.emailController,
                           ),
 
 
                           20.h.heightBox,
                           "Password".text.size(15).fontWeight(FontWeight.normal).make(),
                           8.h.heightBox,
-                          const VxTextField(
+                          VxTextField(
                             isPassword: true,
                             obscureText: true,
                             borderColor: Colors.brown,
                             borderType: VxTextFieldBorderType.roundLine,
                             borderRadius: 10,
-                            prefixIcon: Icon(Icons.lock_open_rounded),
+                            prefixIcon: const Icon(Icons.lock_open_rounded),
+                            controller: loginViewModel.passwordController,
                           ),
                           40.h.heightBox,
                           Row(
@@ -95,7 +107,10 @@ class _LoginState extends State<Login> {
                           // PrimaryButton(title: "Login", onPressed: (){}),
 
                           ElevatedButton(
-                              onPressed: ()=> AutoRouter.of(context).push( const GeneralPageRoute()),
+                              onPressed: () {
+                                loginViewModel.login();
+                              },
+                              // AutoRouter.of(context).push( const GeneralPageRoute()),
                               style: ElevatedButton.
                               styleFrom(backgroundColor: MyColors.primaryColor,
                                 minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
