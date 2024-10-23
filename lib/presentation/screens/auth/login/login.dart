@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
 
                           ElevatedButton(
                               onPressed: () {
-                                loginViewModel.login();
+                                loginViewModel.login(context);
                               },
                               // AutoRouter.of(context).push( const GeneralPageRoute()),
                               style: ElevatedButton.
