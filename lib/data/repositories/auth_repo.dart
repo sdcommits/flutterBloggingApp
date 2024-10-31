@@ -8,7 +8,7 @@ import '../data_sources/remote/api_endpoint_urls.dart';
 class AuthRepo extends ApiClient{
   AuthRepo();
 
-  Future<LoginModel> userLogin(String email, String password) async{
+  Future<LoginModel> userLogin(String email, String password,context) async{
     Map body = {
       "email":email,
       "password":password,
@@ -26,6 +26,7 @@ class AuthRepo extends ApiClient{
       }
     }
     on Exception catch(e){
+      VxToast.show(context,msg: e.toString());
       Vx.log(e);
       LoginModel();
     }

@@ -25,15 +25,15 @@ class ApiClient {
 
 
     try {
-      debugPrint("=========API REQUEST============");
+      debugPrint("🚀=========API REQUEST============🚀");
       debugPrint("Request Url: ${baseOptions.baseUrl + path}");
       var response = await dio.get(path);
-      debugPrint("=========API RESPONSE============");
+      debugPrint("🔥=========API RESPONSE============🔥");
       debugPrint("Status Code : ${response.statusCode}");
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);
@@ -51,15 +51,16 @@ class ApiClient {
       "Bearer 94|Qwer"},
     );
     try {
-      debugPrint("=========API REQUEST============");
+      debugPrint("🚀=========API REQUEST============🚀");
       debugPrint("Request Url: ${baseOptions.baseUrl + path}");
+      debugPrint("Body : $body");
       var response = await dio.post(path, data : body, options: options);
-      debugPrint("=========API RESPONSE============");
+      debugPrint("🔥=========API RESPONSE============🔥");
       debugPrint("Status Code : ${response.statusCode}");
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);
