@@ -47,101 +47,114 @@ class _LoginState extends State<Login> {
                       height: 80.h,
                       width: 139.w).centered(),
                 100.heightBox,
-                Container(
-                  height: MediaQuery.sizeOf(context).height,
-                  width: MediaQuery.sizeOf(context).width,
-                  decoration: const BoxDecoration
-                    (
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(40),
-                      topLeft: Radius.circular(40)
-                    )
-                  ),
-                  child:
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          50.h.heightBox,
-                          "Login"
-                              .text
-                              .size(20)
-                              .fontWeight(FontWeight.w700)
-                              .color(MyColors.primaryColor)
-                              .make().centered(),
-                          48.h.heightBox,
-                          "Email".text.size(15).fontWeight(FontWeight.normal).make(),
-                          8.h.heightBox,
-                           VxTextField(
-                            borderColor: Colors.brown,
-                             borderType: VxTextFieldBorderType.roundLine,
-                             borderRadius: 10,
-                             prefixIcon: const Icon(Icons.email),
-                             controller: loginViewModel.emailController,
-                          ),
-
-
-                          20.h.heightBox,
-                          "Password".text.size(15).fontWeight(FontWeight.normal).make(),
-                          8.h.heightBox,
-                          VxTextField(
-                            isPassword: true,
-                            obscureText: true,
-                            borderColor: Colors.brown,
-                            borderType: VxTextFieldBorderType.roundLine,
-                            borderRadius: 10,
-                            prefixIcon: const Icon(Icons.lock_open_rounded),
-                            controller: loginViewModel.passwordController,
-                          ),
-                          40.h.heightBox,
-                          Row(
-                            children: [
-                              // CheckboxListTile(value: false, onChanged: (value){}, title: "Remember me".text.make()),
-                              "Forgot Password".text
-                                  .size(14)
-                                  .make(),
-                            ],
-                          ),
-                          50.h.heightBox,
-                          // PrimaryButton(title: "Login", onPressed: (){}),
-
-                          ElevatedButton(
-                              onPressed: () {
-                                loginViewModel.login(context);
-                              },
-                              // AutoRouter.of(context).push( const GeneralPageRoute()),
-                              style: ElevatedButton.
-                              styleFrom(backgroundColor: MyColors.primaryColor,
-                                minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11.r)),),
-                              child: "Login".
-                              text.
-                              size(20).
-                              fontWeight(FontWeight.w700).
-                              color(Colors.white).
-                              make()
-                          ),
-                          15.h.heightBox,
-                          "Don't have any account".richText
-                              .size(15)
-                              .bold
-                          .color(MyColors.primaryColor)
-                              .withTextSpanChildren([
-                            TextSpan(
-                              text: " SignUp",
-                              recognizer:
-                              TapGestureRecognizer()..onTap=()=> AutoRouter.of(context).push(const RegisterPageRoute()),
-
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ])
-                              .make().centered()
-                        ],
-                      ),
+                Form(
+                  key: loginViewModel.formKey,
+                  child: Container(
+                    height: MediaQuery.sizeOf(context).height,
+                    width: MediaQuery.sizeOf(context).width,
+                    decoration: const BoxDecoration
+                      (
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(40),
+                        topLeft: Radius.circular(40)
+                      )
                     ),
+                    child:
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            50.h.heightBox,
+                            "Login"
+                                .text
+                                .size(20)
+                                .fontWeight(FontWeight.w700)
+                                .color(MyColors.primaryColor)
+                                .make().centered(),
+                            48.h.heightBox,
+                            "Email".text.size(15).fontWeight(FontWeight.normal).make(),
+                            8.h.heightBox,
+                             VxTextField(
+                              borderColor: Colors.brown,
+                               borderType: VxTextFieldBorderType.roundLine,
+                               borderRadius: 10,
+                               prefixIcon: const Icon(Icons.email),
+                               controller: loginViewModel.emailController,
+                               validator: (email){
+                                if(email!.isEmpty){
+                                  return "Email is empty";
+
+                                }
+                                return null;
+                               },
+                            ),
 
 
+                            20.h.heightBox,
+                            "Password".text.size(15).fontWeight(FontWeight.normal).make(),
+                            8.h.heightBox,
+                            VxTextField(
+                              isPassword: true,
+                              obscureText: true,
+                              borderColor: Colors.brown,
+                              borderType: VxTextFieldBorderType.roundLine,
+                              borderRadius: 10,
+                              prefixIcon: const Icon(Icons.lock_open_rounded),
+                              controller: loginViewModel.passwordController,
+                            ),
+                            40.h.heightBox,
+                            Row(
+                              children: [
+                                // CheckboxListTile(value: false, onChanged: (value){}, title: "Remember me".text.make()),
+                                "Forgot Password".text
+                                    .size(14)
+                                    .make(),
+                              ],
+                            ),
+                            50.h.heightBox,
+                            // PrimaryButton(title: "Login", onPressed: (){}),
+
+                            ElevatedButton(
+                                onPressed: () {
+                                  if(loginViewModel.formKey.currentState!.validate()){
+                                    loginViewModel.login(context);
+                                  }else if(email.isValidEmail)
+
+                                },
+                                // AutoRouter.of(context).push( const GeneralPageRoute()),
+                                style: ElevatedButton.
+                                styleFrom(backgroundColor: MyColors.primaryColor,
+                                  minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11.r)),),
+                                child: "Login".
+                                text.
+                                size(20).
+                                fontWeight(FontWeight.w700).
+                                color(Colors.white).
+                                make()
+                            ),
+                            15.h.heightBox,
+                            "Don't have any account".richText
+                                .size(15)
+                                .bold
+                            .color(MyColors.primaryColor)
+                                .withTextSpanChildren([
+                              TextSpan(
+                                text: " SignUp",
+                                recognizer:
+                                TapGestureRecognizer()..onTap=()=> AutoRouter.of(context).push(const RegisterPageRoute()),
+
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ])
+                                .make().centered()
+                          ],
+                        ),
+                      ),
+
+
+                  ),
                 )
                 ],
               ),
