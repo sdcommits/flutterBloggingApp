@@ -5,6 +5,7 @@ import 'package:bogging_app/core/constant/my_colors.dart';
 import 'package:bogging_app/data/repositories/repository.dart';
 import 'package:bogging_app/presentation/common_widgets/common_widgets.dart';
 import 'package:bogging_app/presentation/router/router_import.gr.dart';
+import 'package:bogging_app/utils/validations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,7 +85,8 @@ class _LoginState extends State<Login> {
                                validator: (email){
                                 if(email!.isEmpty){
                                   return "Email is empty";
-
+                                }else if(!email.isValidEmail){
+                                  return "Invalid Email Bro";
                                 }
                                 return null;
                                },
@@ -102,6 +104,15 @@ class _LoginState extends State<Login> {
                               borderRadius: 10,
                               prefixIcon: const Icon(Icons.lock_open_rounded),
                               controller: loginViewModel.passwordController,
+                              validator: (password){
+                                if(password!.isEmpty){
+                                  return "Password is empty";
+                                }
+                                // else if(!password.isValidPassword){
+                                //   return "Invalid Password";
+                                // }
+                                return null;
+                              },
                             ),
                             40.h.heightBox,
                             Row(
@@ -119,8 +130,7 @@ class _LoginState extends State<Login> {
                                 onPressed: () {
                                   if(loginViewModel.formKey.currentState!.validate()){
                                     loginViewModel.login(context);
-                                  }else if(email.isValidEmail)
-
+                                  }
                                 },
                                 // AutoRouter.of(context).push( const GeneralPageRoute()),
                                 style: ElevatedButton.
