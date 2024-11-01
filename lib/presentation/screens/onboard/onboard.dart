@@ -55,13 +55,9 @@ class _OnBoardPageState extends State<OnBoardPage> {
                 ).expand(),
                 61.h.heightBox,
                 ElevatedButton(
-                    onPressed: ()=> AutoRouter.of(context).
-                    push( const AuthPageRoute()),
-                    // onPressed: (){
-                    //   TagsRepo().getAllTags(
-                    //
-                    //   );
-                    // },
+                    // onPressed: ()=> AutoRouter.of(context).
+                    // push( const AuthPageRoute()),
+                    onPressed: ()async{},
                     style: ElevatedButton.
                     styleFrom(backgroundColor: MyColors.primaryColor,
                         minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
