@@ -1,9 +1,13 @@
 import 'package:bogging_app/core/constant/my_assests.dart';
 import 'package:bogging_app/core/constant/my_colors.dart';
+import 'package:bogging_app/presentation/screens/general/profile/profile_view_model.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../../../data/repositories/repository.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -13,14 +17,24 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+ late ProfileViewModel profileViewModel;
+ @override
+ void initState(){
+   profileViewModel = ProfileViewModel(repository: context.read<Repository>());
+   super.initState();
+ }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        // actions: [
-        //   Icons(FeatherIcons.eye)
-        // ],
+        actions: [
+          IconButton(
+            onPressed: ()=> profileViewModel.logout(context),
+            icon: const Icon(FeatherIcons.logOut).pOnly(right: 10),)
+
+        ],
         title: Text("Profile", style: TextStyle(color: Colors.white),), backgroundColor: MyColors.primaryColor,
       ),
       body: ListView(
