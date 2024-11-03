@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/utils.dart';
 import 'api_constant.dart';
 import 'api_endpoint_urls.dart';
 //
@@ -45,10 +46,11 @@ class ApiClient {
     }
   }
 
-  Future<Response> postRequest({required String path, required dynamic body}) async {
+  Future<Response> postRequest({required String path, dynamic body}) async {
+    var token = await Utils.getToken();
     final options = Options(
       headers: {"Authorization" :
-      "Bearer 94|Qwer"},
+      "Bearer $token"},
     );
     try {
       debugPrint("🚀=========API REQUEST============🚀");
