@@ -10,6 +10,7 @@ import 'package:bogging_app/presentation/screens/onboard/widgets/onboard_second.
 import 'package:bogging_app/presentation/screens/onboard/widgets/onboard_third.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -55,9 +56,13 @@ class _OnBoardPageState extends State<OnBoardPage> {
                 ).expand(),
                 61.h.heightBox,
                 ElevatedButton(
-                    // onPressed: ()=> AutoRouter.of(context).
-                    // push( const AuthPageRoute()),
-                    onPressed: ()async{},
+                    onPressed: ()=> AutoRouter.of(context).
+                    push( const AuthPageRoute()),
+                    // onPressed: ()async{
+                    //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+                    //   var token = prefs.getString("token");
+                    //   Vx.log(token);
+                    // },
                     style: ElevatedButton.
                     styleFrom(backgroundColor: MyColors.primaryColor,
                         minimumSize: Size(MediaQuery.of(context).size.width, 44.h),

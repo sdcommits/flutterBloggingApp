@@ -9,6 +9,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../utils/utils.dart';
+
 part 'splash.dart';
 
 
