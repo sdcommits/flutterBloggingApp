@@ -10,6 +10,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_bloc/cubit/velocity_cubit/velocity_cubit.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../core/constant/my_assests.dart';
@@ -126,7 +127,11 @@ class _LoginState extends State<Login> {
                             50.h.heightBox,
                             // PrimaryButton(title: "Login", onPressed: (){}),
 
-                            ElevatedButton(
+                            BlocBuilder<VelocityBloc<bool>, VelocityState<bool>>(
+                              bloc: loginViewModel.isLoadingBloc,
+                                builder: (context, state) {
+                                  return ElevatedButton(
+
                                 onPressed: () {
                                   if(loginViewModel.formKey.currentState!.validate()){
                                     loginViewModel.login(context);
@@ -137,13 +142,17 @@ class _LoginState extends State<Login> {
                                 styleFrom(backgroundColor: MyColors.primaryColor,
                                   minimumSize: Size(MediaQuery.of(context).size.width, 44.h),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11.r)),),
-                                child: "Login".
+                                child:
+                                  state == true? const CircularProgressIndicator(color: Colors.white) :
+                                "Login".
                                 text.
                                 size(20).
                                 fontWeight(FontWeight.w700).
                                 color(Colors.white).
                                 make()
-                            ),
+                            );
+  },
+),
                             15.h.heightBox,
                             "Don't have any account".richText
                                 .size(15)
