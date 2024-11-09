@@ -1,6 +1,7 @@
 import 'package:bogging_app/core/constant/my_strings.dart';
 import 'package:bogging_app/core/themes/app_themes.dart';
 import 'package:bogging_app/data/repositories/auth_repo.dart';
+import 'package:bogging_app/data/repositories/posts_repo.dart';
 import 'package:bogging_app/presentation/router/router_import.dart';
 import 'package:bogging_app/presentation/screens/general/tags/tags_model.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ void main() {
       create: (context) => Repository(
         tagsRepo: TagsRepo(),
         authRepo: AuthRepo(),
+        postsRepo: PostsRepo(),
       ),
     child : MyApp(),
   ));
