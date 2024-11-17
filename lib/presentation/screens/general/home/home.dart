@@ -80,13 +80,22 @@ class _HomeState extends State<Home> {
                             physics: const NeverScrollableScrollPhysics(),
                             separatorBuilder: (context, index)=> SizedBox(height: 15,),
                             itemBuilder: (context,index){
+
+                              var latestPost = state.data.allPosts![index];
+                              var imagePath = latestPost.featuredimage
+                                  .toString()
+                                  //.prepend('https://techblog.codersangam.com/')
+                                  .replaceAll("public", "storage");
                               return Row(
                                 children: [
                                   GestureDetector(
-                                    onTap: ()=> AutoRouter.of(context).push( const HomeDetailsRoute()),
-                                    child: Image.asset(MyAssests.assetsImageNetFlix,
+                                    onTap: ()=> AutoRouter.of(context).push( const HomeDetailsRoute(
+                                      post: latestPost,
+                                    )),
+                                    child: Image.network(
+                                    imagePath,
                                         height: 100,
-                                        width: 160,
+                                        width: 140,
                                         fit: BoxFit.cover )
                                         .cornerRadius(20),
                                   ),
@@ -94,8 +103,8 @@ class _HomeState extends State<Home> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      "Netflix Will Charge Money for Password Sharing"
-                                          .text
+                                     latestPost.title!
+                                         .text
                                           .size(16)
                                           .maxLines(2)
                                           .bold
@@ -104,8 +113,15 @@ class _HomeState extends State<Home> {
                                       Row(
                                         children: [
                                           const Icon(FeatherIcons.clock, color: Colors.grey, size:  16,),
-                                          " 6 Months ago"
-                                              .text.size(16).color(Colors.grey).size(16).make(),
+                                         8.horizontalSpace,
+                                         latestPost.createdAt!
+                                         .timeAgo()
+                                             .toString()
+                                             .text
+                                             .size(16)
+                                             .color(Colors.grey)
+                                             .size(16)
+                                             .make(),
 
                                         ],
                                       ),
@@ -114,7 +130,7 @@ class _HomeState extends State<Home> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           // const Icon(FeatherIcons.eye),
-                                          " 59 views"
+                                          " ${latestPost.views} views"
                                               .text.size(16).make(),
                                           const Icon(FeatherIcons.bookmark, size: 18)
 
