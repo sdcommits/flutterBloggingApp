@@ -9,6 +9,7 @@ import 'package:velocity_bloc/cubit/velocity_cubit/velocity_cubit.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../data/repositories/repository.dart';
+import '../../auth/widgets/home_details.dart';
 import '../../auth/widgets/home_model.dart';
 import '../../auth/widgets/home_view_model.dart';
 
@@ -48,11 +49,11 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
-                  GestureDetector(
-                      onTap: ()=> AutoRouter.of(context).push(HomeDetailsRoute()),
-                      child:
-                      Image.asset(MyAssests.assetsImageNetFlix)
-                          .cornerRadius(20)),
+                  // GestureDetector(
+                  //     onTap: ()=> AutoRouter.of(context).push(HomeDetailsRoute(post: latestPost, imagePath: imagePath)),
+                  //     child:
+                  //     Image.asset(MyAssests.assetsImageNetFlix)
+                  //         .cornerRadius(20)),
                   20.h.heightBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,94 +65,76 @@ class _HomeState extends State<Home> {
                   15.h.heightBox,
 
 
-                  BlocBuilder<VelocityBloc<HomeModel>,
-                      VelocityState<HomeModel>>(
-                      bloc: homeViewModel.postsBloc,
-                      builder: (context, state) {
-                        if (state is VelocityInitialState){
-                          return const Center(
-                            child: CircularProgressIndicator.adaptive(),
-                          );
-                        }
-                        else if (state is VelocityUpdateState){
-                          return ListView.separated(
-                            shrinkWrap: true,
-                            itemCount: state.data.allPosts!.length,
-                            physics: const NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index)=> SizedBox(height: 15,),
-                            itemBuilder: (context,index){
+            ListView.separated(
+            shrinkWrap: true,
+            itemCount: state.data.allPosts!.length,
+            physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (context, index)=> SizedBox(height: 15,),
+            itemBuilder: (context,index){
 
-                              var latestPost = state.data.allPosts![index];
-                              var imagePath = latestPost.featuredimage
-                                  .toString()
-                                  //.prepend('https://techblog.codersangam.com/')
-                                  .replaceAll("public", "storage");
-                              return Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: ()=> AutoRouter.of(context).push( const HomeDetailsRoute(
-                                      post: latestPost,
-                                    )),
-                                    child: Image.network(
-                                    imagePath,
-                                        height: 100,
-                                        width: 140,
-                                        fit: BoxFit.cover )
-                                        .cornerRadius(20),
-                                  ),
-                                  10.w.widthBox,
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                     latestPost.title!
-                                         .text
-                                          .size(16)
-                                          .maxLines(2)
-                                          .bold
-                                          .make(),
-                                      6.h.heightBox,
-                                      Row(
-                                        children: [
-                                          const Icon(FeatherIcons.clock, color: Colors.grey, size:  16,),
-                                         8.horizontalSpace,
-                                         latestPost.createdAt!
-                                         .timeAgo()
-                                             .toString()
-                                             .text
-                                             .size(16)
-                                             .color(Colors.grey)
-                                             .size(16)
-                                             .make(),
+            var latestPost = state.data.allPosts![index];
+            var imagePath = latestPost.featuredimage
+                .toString()
+            .prepend('https://techblog.codersangam.com/')
+                .replaceAll("public", "storage");
+            return Row(
+              children: [
+                GestureDetector(
+                    onTap: ()=> AutoRouter.of(context).
+                          push( HomeDetailsRoute(post: latestPost, imagePath: imagePath)),
+                    child: Image.network(
+                          imagePath,
+                          height: 100,
+                          width: 140,
+                          fit: BoxFit.cover )
+                .cornerRadius(20),
+            ),
+            10.w.widthBox,
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    latestPost.title!
+                        .text
+                        .size(16)
+                        .maxLines(2)
+                          .bold
+                          .make(),
+            6.h.heightBox,
+            Row(
+            children: [
+            const Icon(FeatherIcons.clock, color: Colors.grey, size:  16,),
+                                8.horizontalSpace,
+                                latestPost.createdAt!
+                                        .timeAgo()
+                                        .toString()
+                                        .text
+                                        .size(16)
+                                        .color(Colors.grey)
+                                        .size(16)
+                                        .make(),
 
-                                        ],
-                                      ),
-                                      6.h.heightBox,
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          // const Icon(FeatherIcons.eye),
-                                          " ${latestPost.views} views"
-                                              .text.size(16).make(),
-                                          const Icon(FeatherIcons.bookmark, size: 18)
+                  ],
+                ),
+                  6.h.heightBox,
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+            // const Icon(FeatherIcons.eye),
+                                " ${latestPost.views} views"
+                .text.size(16).make(),
+            const Icon(FeatherIcons.bookmark, size: 18)
 
-                                        ],
-                                      ),
-                                      6.h.heightBox,
-                                    ],
-                                  ).expand()
+                ],
+                ),
+            6.h.heightBox,
+                ]   ,
+                  ).expand()
 
-                                ],
-                              );
-                            },
+            ],
+            );
+            },
 
-                          );
-
-                        }
-                        return const SizedBox();
-
-                      }
-
-                  ),
+            ),
                 ],
 
 

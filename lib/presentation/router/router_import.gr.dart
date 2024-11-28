@@ -12,8 +12,10 @@ import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/presentation/screens/auth/auth.dart';
 import 'package:bogging_app/presentation/screens/auth/widgets/home_details.dart';
+import 'package:bogging_app/presentation/screens/auth/widgets/home_model.dart';
 import 'package:bogging_app/presentation/screens/splash/splash_import.dart'
     as _i1;
+import 'package:flutter/cupertino.dart';
 
 import '../screens/auth/Login/login.dart';
 import '../screens/auth/Register/register.dart';
@@ -39,12 +41,29 @@ abstract class $AppRouter extends _i2.RootStackRouter {
       );
     },
 
+    // HomeDetailsRoute.name: (routeData) {
+    //   return AutoRoutePage<dynamic>(
+    //     routeData: routeData,
+    //     child: const HomeDetails(
+    //       post: args.post,
+    //       ima
+    //     ),
+    //   );
+    // },
+
     HomeDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const HomeDetails(),
+        child: HomeDetails(
+          key: args.key,
+          post: args.post,
+          imagePath: args.imagePath,
+        ),
       );
     },
+
+
 
     AuthPageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
@@ -124,16 +143,59 @@ class RegisterPageRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [HomeDetailsPage]
 
-class HomeDetailsRoute extends PageRouteInfo<void> {
-  const HomeDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+// class HomeDetailsRoute extends PageRouteInfo<void> {
+//   const HomeDetailsRoute({List<PageRouteInfo>? children, required Post post})
+//       : super(
+//     HomeDetailsRoute.name,
+//     initialChildren: children,
+//   );
+//
+//   static const String name = 'HomeDetailsRoute';
+//
+//   static const PageInfo<void> page = PageInfo<void>(name);
+//
+//   get post => null;
+// }
+
+class HomeDetailsRoute extends PageRouteInfo<HomeDetailsRouteArgs> {
+  HomeDetailsRoute({
+    Key? key,
+    required Post post,
+    required String imagePath,
+    List<PageRouteInfo>? children,
+  }) : super(
     HomeDetailsRoute.name,
+    args: HomeDetailsRouteArgs(
+      key: key,
+      post: post,
+      imagePath: imagePath,
+    ),
     initialChildren: children,
   );
 
   static const String name = 'HomeDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<HomeDetailsRouteArgs> page =
+  PageInfo<HomeDetailsRouteArgs>(name);
+}
+
+class HomeDetailsRouteArgs {
+  const HomeDetailsRouteArgs({
+    this.key,
+    required this.post,
+    required this.imagePath,
+  });
+
+  final Key? key;
+
+  final Post post;
+
+  final String imagePath;
+
+  @override
+  String toString() {
+    return 'HomeDetailsRouteArgs{key: $key, post: $post, imagePath: $imagePath}';
+  }
 }
 
 // generated route for
