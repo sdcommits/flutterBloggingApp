@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/core/constant/my_assests.dart';
 import 'package:bogging_app/presentation/router/router_import.gr.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,15 +76,17 @@ class _HomeState extends State<Home> {
             var latestPost = state.data.allPosts![index];
             var imagePath = latestPost.featuredimage
                 .toString()
-            .prepend('https://techblog.codersangam.com/')
+            //.prepend('https://techblog.codersangam.com/')
                 .replaceAll("public", "storage");
             return Row(
               children: [
                 GestureDetector(
                     onTap: ()=> AutoRouter.of(context).
-                          push( HomeDetailsRoute(post: latestPost, imagePath: imagePath)),
-                    child: Image.network(
-                          imagePath,
+                          push( HomeDetailsRoute(
+                        post: latestPost,
+                        imagePath: imagePath)),
+                    child: CachedNetworkImage(
+                          imageUrl: imagePath,
                           height: 100,
                           width: 140,
                           fit: BoxFit.cover )
