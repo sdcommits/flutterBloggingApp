@@ -29,7 +29,7 @@ class HomeDetails extends StatelessWidget {
       //     style:
       //   TextStyle(
       //     color: Colors.white,
-      //   ),),
+      //   ),)
       // )
         title: post.title!
             .text
