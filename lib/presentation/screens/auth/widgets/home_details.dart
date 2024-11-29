@@ -30,7 +30,7 @@ class HomeDetails extends StatelessWidget {
       //   TextStyle(
       //     color: Colors.white,
       //   ),),
-      // ),
+      // )
         title: post.title!
             .text
             .ellipsis
