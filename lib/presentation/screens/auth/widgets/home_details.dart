@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:bogging_app/core/constant/my_assests.dart';
 import 'package:bogging_app/core/constant/my_colors.dart';
 import 'package:bogging_app/presentation/screens/auth/widgets/home_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,23 +15,31 @@ class HomeDetails extends StatelessWidget {
 
   //static const page = HomeDetailsRoute();
   static const String routeName = 'homeDetails';
-  const HomeDetails({super.key, required String imagePath, required this.post});
+  const HomeDetails({super.key,required this.post, required this.imagePath});
   final Post post;
+
+  final String imagePath;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.primaryColor,
-        title: const Text("Netfix Will Charge Money for Password Sharing", style:
-        TextStyle(
-          color: Colors.white,
-        ),),
+      //   title: const Text("Netfix Will Charge Money for Password Sharing",
+      //     style:
+      //   TextStyle(
+      //     color: Colors.white,
+      //   ),),
+      // ),
+        title: post.title!
+            .text
+            .ellipsis
+            .make(),
       ),
 
       body: ListView(
 
         children: [
-          Image.asset( MyAssests.assetsImageNetFlix),
+         CachedNetworkImage( imageUrl : imagePath),
           10.heightBox,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
