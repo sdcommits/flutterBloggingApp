@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../router/router_import.gr.dart';
@@ -28,8 +29,8 @@ class HomeDetails extends StatelessWidget {
       //     style:
       //   TextStyle(
       //     color: Colors.white,
-      //   ),),
-      // ),
+      //   ),)
+      // )
         title: post.title!
             .text
             .ellipsis
@@ -47,7 +48,7 @@ class HomeDetails extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
               child: Column(
                 children: [
-                  "Netfix Will Charge Money for Password Sharing"
+                  post.title!
                       .text
                       .bold
                       .xl2
@@ -58,7 +59,7 @@ class HomeDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [const Icon(FeatherIcons.eye, color: Colors.grey,),
                         8.w.widthBox,
-                        "147 views".text.color(Colors.grey[700]).make(),
+                        "${post.views} Views".text.color(Colors.grey[700]).make(),
                         Spacer(),
 
                         IconButton(onPressed: (){},icon: const
@@ -73,23 +74,8 @@ class HomeDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-                  "At Netflix, we want to entertain the world. Whatever your taste, and"
-                      " no matter where you live, we give you access to best-in-class TV "
-                      "series, documentaries, feature films and games. Our members control "
-                      "what they want to watch, when they want it, in one simple subscription."
-                      " We’re streaming in more than 30 languages and 190 countries, because"
-                      " great stories can come from anywhere and be loved everywhere. We are "
-                      "the world’s biggest fans of entertainment, and we’re always looking to"
-                      " help you find your next favorite story. In 2007 Netflix introduced "
-                      "streaming services that allowed subscribers to access content directly "
-                      "over the Internet. Streaming quickly gained momentum, becoming unlimited "
-                      "for most subscription plans. Netflix partnered with makers of video game "
-                      "consoles, Blu-ray players, and other electronics to enable video streaming "
-                      "on those devices. Netflix introduced a streaming-only plan by 2010 and that"
-                      " same year introduced an app for iPhones (the app became available on some "
-                      "Android devices by 2011). The company initiated its global expansion to"
-                      " Canada, Latin America, the Caribbean, and Europe by 2012, reaching more "
-                      "than 190 countries and territories by 2016.".text.make()
+                  HtmlWidget(post.body!),
+                  //.text.make()
                 ],
               ),
             ),
