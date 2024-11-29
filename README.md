@@ -1,4 +1,4 @@
-# bogging_app
+# bolgging_app
 
 A new Flutter project.
 
