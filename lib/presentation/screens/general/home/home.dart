@@ -1,3 +1,4 @@
+import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bogging_app/core/constant/my_assests.dart';
 import 'package:bogging_app/presentation/router/router_import.gr.dart';
@@ -47,14 +48,25 @@ class _HomeState extends State<Home> {
           }
           else if(state is VelocityUpdateState){
             return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              //padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
-                  // GestureDetector(
-                  //     onTap: ()=> AutoRouter.of(context).push(HomeDetailsRoute(post: latestPost, imagePath: imagePath)),
-                  //     child:
-                  //     Image.asset(MyAssests.assetsImageNetFlix)
-                  //         .cornerRadius(20)),
+                  
+                  VxSwiper.builder(
+                    autoPlay:  true,
+                      enlargeCenterPage: true,
+                      itemCount: state.data.popularPosts!.length,
+                      itemBuilder: (context, index){
+                        var latestPost = state.data.popularPosts![index];
+                        var imagePath = latestPost.featuredimage
+                            .toString()
+                        //.prepend('https://techblog.codersangam.com/')
+                            .replaceAll("public", "storage");
+                  //   return Image.asset(MyAssests.assetsImageNetFlix).cornerRadius(10);
+                  return CachedNetworkImage(imageUrl: imagePath, fit: BoxFit.cover,)
+                      .cornerRadius(20).pSymmetric(h : 10);
+                        }),
+                      
                   20.h.heightBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,11 +74,12 @@ class _HomeState extends State<Home> {
                       "Latest Posts".text.size(16).make(),
                       "See All".text.size(16).make(),
                     ],
-                  ),
+                  ).pSymmetric(h : 24.w),
                   15.h.heightBox,
 
 
             ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
             shrinkWrap: true,
             itemCount: state.data.allPosts!.length,
             physics: const NeverScrollableScrollPhysics(),
@@ -103,21 +116,23 @@ class _HomeState extends State<Home> {
                           .bold
                           .make(),
             6.h.heightBox,
-            Row(
-            children: [
-            const Icon(FeatherIcons.clock, color: Colors.grey, size:  16,),
-                                8.horizontalSpace,
-                                latestPost.createdAt!
-                                        .timeAgo()
-                                        .toString()
-                                        .text
-                                        .size(16)
-                                        .color(Colors.grey)
-                                        .size(16)
-                                        .make(),
+            FadedScaleAnimation(
+              child: Row(
+              children: [
+              const Icon(FeatherIcons.clock, color: Colors.grey, size:  16,),
+                                  8.horizontalSpace,
+                                  latestPost.createdAt!
+                                          .timeAgo()
+                                          .toString()
+                                          .text
+                                          .size(16)
+                                          .color(Colors.grey)
+                                          .size(16)
+                                          .make(),
 
-                  ],
-                ),
+                    ],
+                  ),
+            ),
                   6.h.heightBox,
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
