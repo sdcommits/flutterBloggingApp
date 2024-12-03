@@ -40,7 +40,9 @@ class HomeDetails extends StatelessWidget {
       body: ListView(
 
         children: [
-         CachedNetworkImage( imageUrl : imagePath),
+         Hero(
+             tag: Key(post.id.toString()),
+             child: CachedNetworkImage( imageUrl : imagePath)),
           10.heightBox,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),

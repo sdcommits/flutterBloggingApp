@@ -98,12 +98,15 @@ class _HomeState extends State<Home> {
                           push( HomeDetailsRoute(
                         post: latestPost,
                         imagePath: imagePath)),
-                    child: CachedNetworkImage(
-                          imageUrl: imagePath,
-                          height: 100,
-                          width: 140,
-                          fit: BoxFit.cover )
+                    child: Hero(
+                      tag: Key(latestPost.id.toString()),
+                      child: CachedNetworkImage(
+                            imageUrl: imagePath,
+                            height: 100,
+                            width: 140,
+                            fit: BoxFit.cover )
                 .cornerRadius(20),
+                    ),
             ),
             10.w.widthBox,
               Column(
