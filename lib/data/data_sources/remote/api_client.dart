@@ -20,9 +20,17 @@ class ApiClient {
 
   //Get request
   Future<Response> getRequest({required String path}) async {
-    final options = BaseOptions(baseUrl: ApiConstant.mainUrl);
+    var token = await Utils.getToken();
 
-    final dio = Dio(options);
+    final options = Options(
+      headers: {"Authorization" :
+      "Bearer $token"},
+    );
+
+    
+    // final options = BaseOptions(baseUrl: ApiConstant.mainUrl);
+    //
+    // final dio = Dio(options);
 
 
     try {
@@ -31,6 +39,7 @@ class ApiClient {
       var response = await dio.get(path);
       debugPrint("🔥=========API RESPONSE============🔥");
       debugPrint("Status Code : ${response.statusCode}");
+      log("DATA : ${response.data.toString().substring(0,300)}");
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
