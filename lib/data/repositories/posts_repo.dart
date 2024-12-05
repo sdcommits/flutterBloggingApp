@@ -27,7 +27,7 @@ class PostsRepo extends ApiClient{
   }
   Future<ProfileModel> getUserPosts() async{
     try{
-      final response = await getRequest(path: ApiEndpointUrls.userPosts);
+      final response = await getRequest(path: ApiEndpointUrls.userPosts, isTokenRequired: true);
       if(response.statusCode == 200){
         final responseData = profileModelFromJson(jsonEncode(response.data));
         return responseData;
